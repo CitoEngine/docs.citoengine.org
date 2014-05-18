@@ -1,20 +1,19 @@
 CitoEngine's documentation
 ==========================
 
-Overview
---------
-
 CitoEngine_ is an alert management system that helps you manage chaos in a better way.
 
-.. _CitoEngine: http://citoengine.org
+.. _CitoEngine: http://www.citoengine.org
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   overview
    installcitoengine
    installcitopluginserver
+   gettingstarted
 
 
 
