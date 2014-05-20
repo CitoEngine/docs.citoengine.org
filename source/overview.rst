@@ -27,3 +27,20 @@ It is ideal alert management service for teams who have multiple monitoring syst
 **What it is not:**
 
 CitoEngine is not a monitoring system.
+
+**How do I use it?**
+
+Now that you know what CitoEngine is, we will walk you through how you can use it.
+
+CitoEngine is built on open source technologies and designed to run on Linux. It's built on the following components
+
+* Python 2.7+ 
+* Django 1.6.x / Twisted / other dependencies
+* MariaDB / MySQL 5.5.x (PostgreSQL support coming soon)
+* AWS SQS (RabbitMQ support coming soon)
+
+Currently, we use AWS and it's SQS service for messaging support.  As soon as RabbitMQ support is integrated, AWS SQS service dependency is removed.
+
+CitoEngine can be run on Ubuntu on baremetal hardware or on a Virtual Machine or in the cloud with the only the SQS service running on AWS. 
+
+The next set of links on the side, will help you install and configure CitoEngine for you to manage your alerts!
