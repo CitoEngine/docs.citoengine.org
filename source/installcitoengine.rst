@@ -42,7 +42,7 @@ We recommend you use ``virtualenv`` for running cito engine, this will help you 
 .. code-block:: bash
 
     cd /opt/
-    git clone https://github.com/citoengine/cito
+    git clone https://github.com/citoengine/cito_engine
 
 
 .. code-block:: bash
@@ -55,6 +55,55 @@ We recommend you use ``virtualenv`` for running cito engine, this will help you 
 
 
 **Edit default settings:**  ``/opt/cito/cito/settings/production.py``
+
+**Message Queue Configuration:**
+
+You can either use AWS:SQS or RabbitMQ as your message queue. Edit either of these configuration blocks and make sure
+you select ``QUEUE_TYPE`` to be either ``SQS`` or ``RABBITMQ``
+
+.. code-block:: python
+
+    ##################################
+    # AWS::SQS Configuration settings
+    ##################################
+    AWS_CONF = dict()
+    AWS_CONF['region'] = 'us-east-1'
+    AWS_CONF['awskey'] = ''
+    AWS_CONF['awssecret'] = ''
+    AWS_CONF['sqsqueue'] = 'citoq'
+
+
+    ##################################
+    # RabbitMQ Configuration settings
+    ##################################
+    RABBITMQ_CONF = dict()
+    RABBITMQ_CONF['host'] = 'localhost'
+    RABBITMQ_CONF['port'] = 5672
+    RABBITMQ_CONF['username'] = 'cito_user'
+    RABBITMQ_CONF['password'] = 'CHANGEME!'
+    RABBITMQ_CONF['ssl'] = False
+    RABBITMQ_CONF['exchange'] = ''
+    RABBITMQ_CONF['vhost'] = '/cito_event_listener'
+    RABBITMQ_CONF['queue'] = 'cito_commonq'
+
+    ##############################
+    # Queue type: SQS or RABBITMQ
+    ##############################
+    QUEUE_TYPE = 'RABBITMQ'
+
+.. note:: Avoid editing ``/opt/cito/cito/settings/base.py`` unless you know what you are doing.
+
+**Setting up RabbitMQ (Optional):**
+
+If you are planning to use RabbitMQ, the following three lines should get you started.
+
+.. code-block:: bash
+
+    sudo rabbitmqctl add_user cito_user cito_pass
+    sudo rabbitmqctl add_vhost /cito_event_listener
+    sudo rabbitmqctl set_permissions -p /cito_event_listener cito_user ".*" ".*" ".*"
+
+**Database Configuration:**
 
 .. code-block:: python
 
@@ -73,16 +122,7 @@ We recommend you use ``virtualenv`` for running cito engine, this will help you 
         }
     }
 
-    # AWS conf
-    AWS_CONF = dict()
-    AWS_CONF['region'] = 'us-east-1'
-    AWS_CONF['awskey'] = ''
-    AWS_CONF['awssecret'] = ''
-    AWS_CONF['sqsqueue'] = 'citoq'
-
-.. note:: Avoid editting ``/opt/cito/cito/settings/base.py`` unless you know what you are doing.
-
-Initializing the tables and creating an admin account.
+**Initializing the tables and creating an admin account.**
 
 .. code-block:: bash
 
@@ -105,7 +145,7 @@ Initializing the tables and creating an admin account.
 
 
 Starting the services
---------------------
+---------------------
 
 CitoEngine is divided in three parts, ``poller``, ``listener`` and ``webapp``.
 You can either run the helper scripts in the ``/opt/cito/bin`` directory, or you can run the using ``manage.py <command>``
