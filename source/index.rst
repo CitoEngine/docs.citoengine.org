@@ -14,6 +14,7 @@ Contents:
    installcitoengine
    installcitopluginserver
    gettingstarted
+   integrations
 
 
 
