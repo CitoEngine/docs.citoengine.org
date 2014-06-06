@@ -42,7 +42,7 @@ We recommend you use ``virtualenv`` for running cito engine, this will help you 
 .. code-block:: bash
 
     cd /opt/
-    git clone https://github.com/citoengine/cito_engine
+    git clone https://github.com/CitoEngine/cito_engine /opt/cito
 
 
 .. code-block:: bash
