@@ -15,7 +15,7 @@ Contents:
    installcitopluginserver
    gettingstarted
    integrations
-   changelog
+   releasenotes
 
 
 

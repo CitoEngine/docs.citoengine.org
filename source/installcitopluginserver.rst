@@ -104,7 +104,7 @@ Initializing the tables and creating an admin account.
 
 
 Starting the services
---------------------
+---------------------
 
 You can either run the helper scripts in the ``/opt/cito_plugin_server/bin`` directory, or you can run the using ``manage.py <command>``
 

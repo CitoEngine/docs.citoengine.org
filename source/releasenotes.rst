@@ -1,5 +1,5 @@
-Changelog
-=========
+Release Notes
+=============
 
 
 0.9.0

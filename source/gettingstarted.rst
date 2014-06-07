@@ -1,9 +1,10 @@
 Getting Started
 ===============
 
+
 Architecture
 ------------
-.. image:: images/cito-flow-20140516.png
+.. image:: images/cito-flow-20140607.png
 
 
 The entire system is divided in two groups: ``event_listener``, ``queue``, ``poller`` and ``engine`` fall in the CitoEngine group whereas
@@ -16,15 +17,15 @@ fires the *EventAction*. Thresholds, at the moment, are limited to a conditional
 The *EventAction* is simply telling the ``plugin_server`` to execute the user-defined plugin with the user-defined (customizable)
 parameters.
 
-CitoEngine
-----------
+CitoEngine Terminology
+----------------------
 
 CitoEngine's web interface allows you to define Events, Teams, Categories, Users and PluginServers.
 
 **Events**: An event definition includes a Summary, Description, owning **Team**, Severity and **Category**. Only members of the
 owning **Team** can act on **Incidents** generated upon this **Event**. No two Teams can share the same Event.
 
-**Teams**: Each team is can have one or more **Users** and **Events** associated with them.
+**Teams**: Each team can have one or more **Users** and **Events** associated with them.
 
 **Category**: This is a generic classifier for events. Example categories could be Network, Disk, CPU, etc. These categories
 do not affect the behavior of the **EventActions**.
