@@ -1,51 +1,90 @@
 Getting Started
 ===============
+.. _integerations tools: https://github.com/CitoEngine/integration_tools/
+
+It is highly recommended that you glance over the :ref:`architecture` and :ref:`terminology` docs before
+proceeding further.
+
+Assuming you have the CitoEngine and CitoPluginServer setup, lets configure an end-to-end setup where we:
+
+a. Setup the ``Event`` codes.
+
+b. Setup the a ``Plugin``
+
+c. Configure ``EventActions``
 
 
-Architecture
-------------
-.. image:: images/cito-flow-20140607.png
+Setting up Event Codes
+^^^^^^^^^^^^^^^^^^^^^^
+
+With a fresh installation, you should first define some teams and categories before creating events. Head over to
+``CitoEngine->Settings->Teams`` and add a few teams there (e.g. Ops, QA, DBA-Ops, etc.). Next, head over to
+``CitoEngine->Settings->Categories`` and add a few event categories (e.g. Disk, CPU, Memory, Application, etc.).
+
+.. note:: It is possible to change the names of teams and categories anytime after their creation.
+
+To define an event, go to ``CitoEngine->Event Codes->Define New Event Code``. Fill in the summary as needed e.g.:
+
+.. code-block:: guess
+
+    Summary: /var full
+    Description: Server's /var partition is full, it needs to be cleaned up.
+    Severity: S3
+    Team: Ops
+    Category: Disk
+    Status: <enabled>
 
 
-The entire system is divided in two groups: ``event_listener``, ``queue``, ``poller`` and ``engine`` fall in the CitoEngine group whereas
-``plugin_server`` is a standalone service.
+As this is your first event definition, its event code would be **1**.
+With this bare minimum setup, you are now ready to accept Incidents (alerts) for *EventCode: 1*. Lets test our newly
+created event code:
 
-All alerts enter the system via the ``event_listener`` and are sent over to the ``queue``. A ``poller`` reading this
-``queue`` fetches these events and begins to parse them. If a given event matches a definition in the system, it is accepted as
-an *Incident*. Each *Event* has one or more user-defined *EventActions*. The ``engine`` checks the threshold in real-time and
-fires the *EventAction*. Thresholds, at the moment, are limited to a conditional match of ``X events in Y seconds``.
-The *EventAction* is simply telling the ``plugin_server`` to execute the user-defined plugin with the user-defined (customizable)
-parameters.
+``curl -i -H "Content-Type: application/json" -X POST -d '{"eventid: 1, "element": "foo.bar.com", "message": "It Works!"}' http://localhost:8080/addevent``
 
-CitoEngine Terminology
-----------------------
+**or**
 
-CitoEngine's web interface allows you to define Events, Teams, Categories, Users and PluginServers.
+``event_publisher.py -e 1 -H "foo.bar.com" -m "It Works!" --cito-server localhost --cito-port 8080``
 
-**Events**: An event definition includes a Summary, Description, owning **Team**, Severity and **Category**. Only members of the
-owning **Team** can act on **Incidents** generated upon this **Event**. No two Teams can share the same Event.
-
-**Teams**: Each team can have one or more **Users** and **Events** associated with them.
-
-**Category**: This is a generic classifier for events. Example categories could be Network, Disk, CPU, etc. These categories
-do not affect the behavior of the **EventActions**.
-
-**Users**: One user per installation. User can be part of multiple Teams. User permissions are as under:
+.. note:: You can find ``event_publisher.py`` in `integerations tools`_ repository.
 
 
- * ``SuperAdmin``: Can do just about anything.
- * ``Admin``: Can add teams.
- * ``User``: Can add events and action incidents.
- * ``NOC``: Can comment.
- * ``ReportsUser``: Can only view reports.
+Setting up a Plugin
+^^^^^^^^^^^^^^^^^^^
 
-**Plugin Server Definition**: **Users** can add links to the plugin server. Once added, the system will fetch the active plugins.
-These plugins can now be accessed by the users in **Events** -> **EventActions**.
+Login to the plugin server and create an API Key ``CitoPluginServer->API Keys->Add new key`` e.g. *Ops-Key*
 
-**EventActions**: Users can define which plugin to execute based on a given threshold. The user can send any number of
-parameters to the remote plugin. CitoEngine comes with a few internal variables which can be use sent as parameters:
+Next, we define a Plugin. This can be done at ``CitoPluginServer->Plugins->Add new Plugin``. The ``Name`` here is what
+gets displayed in CitoEngine, so make sure it is unique and non ambigious. Remember, ``Plugin path`` field is relative to
+the ``PLUGIN_DIR`` in your settings file i.e. if you have /opt/citoplugins/clear_tmp.sh plugin and your settings is ``PLUGIN_DIR='/opt/citoplugins'``
+then you just need to give ``clear_tmp.sh`` in ``Plugin path``. To summarize, for our example, a plugin definition would look like:
 
- * ``__ELEMENT__`` Engine send the ``element`` name
- * ``__EVENTID__`` Engine send the ``event`` ID
- * ``__INCIDENTID__`` Engine send the ``incident`` ID
- * ``__MESSAGE__`` Engine send the ``message`` which came in by the alerting system.
+.. code-block:: guess
+
+    Name: ClearTmp
+    Description: Clears /var/tomcat/temp folder.
+    Plugin path: clear_tmp.sh
+    Status: <enabled>
+    Accessible by: Cyrus, Ops-Key
+
+Now lets go back to the API section and copy the URL listed under our previously defined API key e.g.
+``http://192.168.77.77:9000/api/13429401-3e5b-46d4-9762-b40ce689386e``
+
+Add this to ``CitoEngine->Plugins->Add a server``, once added click on the **Refresh** link in the listings page. This would query the plugin
+server and fetch all active plugins.
+
+
+Configuring an Event Action
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the newly created Plugin (ClearTmp) ready to be used, lets go back to our previously created event and add an
+action against it. Go to ``CitoEngine->Events->View Event Codes`` and click on our example event. In the details page,
+click on ``Add an action to this event``, this should show you the event action creation form. Select the plugin *ClearTmp*,
+make sure *enabled* checkbox is ticked.
+
+We need to configure when to invoke the plugin. This can be done by setting the ``Threshold count`` and ``Threshold timer`` values.
+``Threshold count`` of **2** and ``Threshold timer`` of **60** indicates that execute the plugin if this event is called **2 times in 60 secs**
+
+If you are using a self signed SSL certificate, you may want to uncheck the ``SSL Verify`` box on this page. Hit save and you are done.
+
+Use the ``curl`` or ``event_publisher.py`` to send a few sample events making sure that your plugin is executed as intended.
+
