@@ -2,8 +2,9 @@ Integrating CitoEngine with 3rd party tools
 ===========================================
 
 CitoEngine can be easily integrated with existing monitoring systems. All integration scripts mentioned here can be
-found at https://github.com/CitoEngine/integration_tools
+found at `integerations tools`_ repository.
 
+.. _integerations tools: https://github.com/CitoEngine/integration_tools/
 
 Nagios
 ------
