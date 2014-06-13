@@ -29,7 +29,6 @@ It is ideal alert management service for teams who have multiple monitoring syst
 
 CitoEngine is not a monitoring system.
 
-<<<<<<< HEAD
 **How do I use it?**
 
 Now that you know what CitoEngine is, we will walk you through how you can use it.
@@ -46,7 +45,6 @@ Currently, we use AWS and it's SQS service for messaging support.  As soon as Ra
 CitoEngine can be run on Ubuntu on baremetal hardware or on a Virtual Machine or in the cloud with the only the SQS service running on AWS. 
 
 The next set of links on the side, will help you install and configure CitoEngine for you to manage your alerts!
-=======
 
 .. _architecture:
 
@@ -116,4 +114,3 @@ parameters to the remote plugin. CitoEngine comes with a few internal variables 
  * ``__EVENTID__`` Engine send the ``event`` ID
  * ``__INCIDENTID__`` Engine send the ``incident`` ID
  * ``__MESSAGE__`` Engine send the ``message`` which came in by the alerting system.
->>>>>>> v0.9.0
