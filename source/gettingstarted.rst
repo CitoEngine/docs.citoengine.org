@@ -39,10 +39,6 @@ As this is your first event definition, its event code would be **1**.
 With this bare minimum setup, you are now ready to accept Incidents (alerts) for *EventCode: 1*. Lets test our newly
 created event code:
 
-``curl -i -H "Content-Type: application/json" -X POST -d '{"eventid: 1, "element": "foo.bar.com", "message": "It Works!"}' http://localhost:8080/addevent``
-
-**or**
-
 ``event_publisher.py -e 1 -H "foo.bar.com" -m "It Works!" --cito-server localhost --cito-port 8080``
 
 .. note:: You can find ``event_publisher.py`` in `integerations tools`_ repository.
