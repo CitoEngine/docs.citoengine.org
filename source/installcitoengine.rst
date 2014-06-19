@@ -37,7 +37,7 @@ Installation
 
 **Setup python virtualenv**
 
-We recommend you use ``virtualenv`` for running cito engine, this will help you keep manage the dependencies better. Download the latest build
+We recommend you use ``virtualenv`` for running citoengine, this will help you manage dependencies better. Download the latest build
 
 .. code-block:: bash
 
@@ -58,7 +58,9 @@ We recommend you use ``virtualenv`` for running cito engine, this will help you 
 
 **Message Queue Configuration:**
 
-You can either use AWS:SQS or RabbitMQ as your message queue. Edit either of these configuration blocks and make sure
+CitoEngine can be run on Amazon Web Services (AWS) cloud or onpremise.  
+
+If you are running CitoEngine on AWS, use AWS:SQS or if running onpremise, setup RabbitMQ as your message queue. Edit either of these configuration blocks and make sure
 you select ``QUEUE_TYPE`` to be either ``SQS`` or ``RABBITMQ``
 
 .. code-block:: python
@@ -136,7 +138,7 @@ If you are planning to use RabbitMQ, the following three lines should get you st
     # make sure th secret_key.py file is same on all nodes.
     sudo sh -c '/opt/cito/bin/create-django-secret.py > /opt/cito/cito/settings/secret_key.py'
 
-    # Create your first superuser!
+    # Create your first CitoEngine superuser!
     python manage.py createsuperuser
 
 **That's it, you are done!**
@@ -147,7 +149,7 @@ If you are planning to use RabbitMQ, the following three lines should get you st
 Starting the services
 ---------------------
 
-CitoEngine is divided in three parts, ``poller``, ``listener`` and ``webapp``.
+CitoEngine is divided into three components, ``poller``, ``listener`` and ``webapp``. You will have to start services of all three components.
 You can either run the helper scripts in the ``/opt/cito/bin`` directory, or you can run the using ``manage.py <command>``
 
 
@@ -166,7 +168,7 @@ You can either run the helper scripts in the ``/opt/cito/bin`` directory, or you
 
 **Start CitoEngine Webapp**
 
-We would recommended that you execute it with lower privileges. Have a look at ``bin/cito-webapp.sh``
+We would recommended that you execute above commands with lower privileges. Have a look at ``bin/cito-webapp.sh``
 for more information.
 
 .. code-block:: bash
@@ -174,4 +176,4 @@ for more information.
     /opt/cito/bin/cito-webapp.sh
 
 
-Open your browser and access http://<host>:8000 to login to CitoEngine with the admin account you created earlier.
+Open your browser and access http://<hostname or IP>:8000 to login to CitoEngine with the admin account you created earlier.
