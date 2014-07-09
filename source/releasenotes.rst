@@ -1,6 +1,40 @@
 Release Notes
 =============
 
+0.10.0
+------
+
+* LDAP authentication support.
+
+* Auto-refreshing dashboards.
+
+* Search elements/hosts.
+
+* Generate report for most alerted elements/hosts.
+
+* Pagination for event code display.
+
+* Show plugin server's name along with plugin names.
+
+* Lots of bug-fixes.
+
+0.9.3
+-----
+
+* Fixes bug where team list was not getting updated when adding users.
+
+* Adds more validation to JSON strings accepted while adding incidents.
+
+0.9.2
+-----
+* Fixes a critical template bug that didn't allow adding plugin servers on fresh installation.
+
+* Couple of minor bug fixes.
+
+0.9.1
+-----
+
+* Updated the helper scripts in bin directory.
 
 0.9.0
 -----
