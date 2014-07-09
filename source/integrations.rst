@@ -78,3 +78,10 @@ Save this locally and have a quick look at it to confirm everything is in order.
 
 .. note:: Do not run the ``--generate`` command on a previously configured services.cfg which already has _CITOEVENTID added. Always use the original service definition file.
 .. note:: Sensu support will be released shortly.
+
+
+LDAP Authentication
+-------------------
+
+To enable LDAP authentication, simply uncomment the lines in file ``cito/settings/ldap_auth.py``. This file contains the sample LDAP bindings for
+Active Directory. You can modify the bindings based on your LDAP settings.
