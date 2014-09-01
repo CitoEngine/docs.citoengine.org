@@ -20,7 +20,7 @@ Installation
     sudo apt-get install libmysqlclient-dev python-dev python-pip
     sudo pip install virtualenv
     # If you are going to use ldap authentication, then install the following as well
-    sudo apt-get intall libldap2-dev libsasl2-dev libssl-dev
+    sudo apt-get install libldap2-dev libsasl2-dev libssl-dev
 
 **MySQL Installation and Configuration**
 
