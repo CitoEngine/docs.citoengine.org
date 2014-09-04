@@ -16,6 +16,7 @@ Contents:
    gettingstarted
    integrations
    releasenotes
+   troubleshooting
 
 
 
