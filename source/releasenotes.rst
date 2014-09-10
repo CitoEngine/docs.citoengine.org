@@ -1,6 +1,37 @@
 Release Notes
 =============
 
+0.11.0
+------
+
+**New Features**
+
+* get detailed list of incidents from most alerted elements
+
+* search incidents based on elements
+
+* view username for acknowledged and closed incidents
+
+**Bugfixes**
+
+* retry rabbitmq connection without crashing
+
+* better handling of messages (including retries) if DB connection drops
+
+* cleaner connection handler for rabbitmq_read
+
+* close connection after writing a message
+
+* increase default log rotation on 100MB
+
+* changes EventSearchForm to show updated team listings
+
+* removes obsolete dispatcher module
+
+* removes boolean comparison for NoneType in get_report_all_incidents
+
+
+
 0.10.0
 ------
 
