@@ -43,6 +43,9 @@ created event code:
 
 .. note:: You can find ``event_publisher.py`` in `integerations tools`_ repository.
 
+Alternately, you can do a JSON ``POST`` to the listener e.g.
+
+``curl -X POST -d '{"eventid": 1, "element": "citoengine", "message": "healthcheck message"}' "http://my.citoengine.com:8080/addevent/"``
 
 Setting up a Plugin
 ^^^^^^^^^^^^^^^^^^^
