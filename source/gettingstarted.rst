@@ -45,7 +45,17 @@ created event code:
 
 Alternately, you can do a JSON ``POST`` to the listener e.g.
 
-``curl -X POST -d '{"eventid": 1, "element": "citoengine", "message": "healthcheck message"}' "http://my.citoengine.com:8080/addevent/"``
+.. code-block:: javascript
+
+    // Save this as my.json
+    {
+        "event": {"eventid": 1, "element": "citoengine", "message": "healthcheck message"},
+        "timestamp": 1410939898
+    }
+
+
+
+``curl -X POST -d @my.json "http://my.citoengine.com:8080/addevent/"``
 
 Setting up a Plugin
 ^^^^^^^^^^^^^^^^^^^
