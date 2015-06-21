@@ -36,7 +36,7 @@ Now that you know what CitoEngine is, we will walk you through how you can use i
 CitoEngine is built on open source technologies and designed to run on Linux. It's built on the following components
 
 * Python 2.7+ 
-* Django 1.6.x / Twisted / other dependencies
+* Django 1.8+
 * MariaDB / MySQL 5.5.x (PostgreSQL support coming soon)
 * RabbitMQ and AWS SQS (for queue)
 
@@ -54,7 +54,7 @@ Architecture
 The entire system is divided in two groups: ``event_listener``, ``queue``, ``poller`` and ``engine`` fall in the CitoEngine group whereas
 ``plugin_server`` is a standalone service called CitoPluginServer.
 
-All alerts enter the system via the ``event_listener`` and are sent over to the ``queue``. A ``poller`` reading this
+All alerts enter the system via the ``event_listener`` api call and are sent over to the ``queue``. A ``poller`` reading this
 ``queue`` fetches these events and begins to parse them. If a given event matches a definition in the system, it is accepted as
 an *Incident*. Each *Event* has one or more user-defined *EventActions*. The ``engine`` checks the threshold in real-time and
 fires the *EventAction*. Thresholds, at the moment, are limited to a conditional match of ``X events in Y seconds``.
@@ -112,3 +112,9 @@ parameters to the remote plugin. CitoEngine comes with a few internal variables 
  * ``__EVENTID__`` Engine send the ``event`` ID
  * ``__INCIDENTID__`` Engine send the ``incident`` ID
  * ``__MESSAGE__`` Engine send the ``message`` which came in by the alerting system.
+
+
+.. _suppression:
+
+**Suppression**: CitoEngine allows you to suppress an *event*, an *element* or a combination of both. By suppressing an
+event and/or element, there will not be any eventaction taken against incidents against them.

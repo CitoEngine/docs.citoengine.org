@@ -83,5 +83,5 @@ Save this locally and have a quick look at it to confirm everything is in order.
 LDAP Authentication
 -------------------
 
-To enable LDAP authentication, simply uncomment the lines in file ``cito/settings/ldap_auth.py``. This file contains the sample LDAP bindings for
+To enable LDAP authentication, simply uncomment the lines in file ``app/settings/ldap_auth.py``. This file contains the sample LDAP bindings for
 Active Directory. You can modify the bindings based on your LDAP settings.
