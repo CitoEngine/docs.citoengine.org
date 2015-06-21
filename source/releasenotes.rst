@@ -1,6 +1,29 @@
 Release Notes
 =============
 
+1.0.0
+-----
+
+*Release date 21 Jun 2015*
+
+**New Features**
+
+* event suppression
+
+* better application layout and installation script
+
+* integration of listener within the engine
+
+* use gevent for asynchronous processing of incidents
+
+* supports Django 1.8 (with new migrations)
+
+
+**Bugfixes**
+
+many..
+
+
 0.11.0
 ------
 
