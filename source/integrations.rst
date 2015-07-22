@@ -85,3 +85,22 @@ LDAP Authentication
 
 To enable LDAP authentication, simply uncomment the lines in file ``app/settings/ldap_auth.py``. This file contains the sample LDAP bindings for
 Active Directory. You can modify the bindings based on your LDAP settings.
+
+
+JIRA Integration
+----------------
+
+With release of version 1.1.0, we can now create JIRA tickets from the incident view page.
+
+Edit the citoengine.conf and set
+``JIRA_ENABLED`` to True
+
+Set the  ``JIRA_USER``,  ``JIRA_PASSWORD`` and the ``JIRA_FQDN`` (FQDN should not end with a trailing slash ``/``).
+
+``JIRA_PROJECTS``, ``JIRA_ISSUE_TYPES`` and ``JIRA_COMPONENTS`` can be single valued or comma separated list of values.
+
+``JIRA_VERIFY_SSL`` to False if you are using a self-signed certificate or getting any certificate validation errors.
+
+.. note:: JIRA values are case-sensitive, so make sure you double check the names before adding them.
+
+
