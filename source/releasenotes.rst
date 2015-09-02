@@ -1,6 +1,21 @@
 Release Notes
 =============
 
+1.1.0
+_____
+
+*Release date 2 Sep 2015*
+
+**New Features**
+
+* JIRA support
+
+* Reports based on time range
+
+* Sorting of incidents based on time and count
+
+* migrates to Travis' container build system
+
 1.0.0
 -----
 
