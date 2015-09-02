@@ -10,7 +10,7 @@ _____
 
 * JIRA support
 
-* Reports basd on time range
+* Reports based on time range
 
 * Sorting of incidents based on time and count
 
