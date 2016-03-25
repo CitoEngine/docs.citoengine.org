@@ -1,6 +1,21 @@
 Release Notes
 =============
 
+1.3.0
+_____
+
+*Release date 25 Mar 2016*
+
+**New Features**
+
+*  Modify JIRA ticket for existing incident
+
+* Bulk toggle of incidents
+
+* Bulk JIRA assignment of incidents
+
+* minor bugfixes
+
 1.1.0
 _____
 
