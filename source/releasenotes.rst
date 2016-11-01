@@ -1,6 +1,16 @@
 Release Notes
 =============
 
+1.3.1
+_____
+
+*Release date 01 Nov 2016*
+
+**Bug Fix**
+
+* #66 - Do not allow incidents for disabled events
+
+
 1.3.0
 _____
 
